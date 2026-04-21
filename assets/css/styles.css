@@ -279,6 +279,9 @@ a{ color: inherit; }
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
   min-height: 96px;
 }
+.card:not(.featured){
+  box-shadow: 0 8px 16px -14px rgba(16,24,40,.28);
+}
 .card:hover{
   transform: translateY(-1px);
   border-color: var(--line-soft);
