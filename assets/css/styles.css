@@ -317,7 +317,7 @@ a{ color: inherit; }
   font-family: 'Libre Baskerville', serif;
   font-size: 17px;
   font-weight: 700;
-  color: var(--ink);
+  color: #454039;
   letter-spacing: .01em;
   line-height: 1.15;
 }
