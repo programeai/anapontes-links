@@ -473,6 +473,11 @@
     margin-top: 14px;
     letter-spacing: .04em;
   }
+  .foot .f-responsibility{
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: .04em;
+  }
 
   /* ===== Responsive ===== */
   @media (max-width: 860px){
