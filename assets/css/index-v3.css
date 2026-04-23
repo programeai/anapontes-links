@@ -104,12 +104,28 @@
     position: absolute;
     left: 0; right: 0;
     bottom: 28px;
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
     z-index: 5;
     color: #fff;
   }
+  .logo-block .logo-top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .logo-block .logo-bottom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
   .logo-block .logo-mark{
-    width: 50px; height: 50px;
+    width: 24px; height: 42px;
     display: grid; place-items: center;
     filter: drop-shadow(0 2px 10px rgba(16,24,40,.22));
   }
@@ -117,26 +133,32 @@
     width: 100%; height: 100%; object-fit: contain;
     filter: brightness(0) invert(1);
   }
+  .logo-block .logo-text{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2px;
+  }
   .logo-block .logo-name{
     font-family: 'Libre Baskerville', serif;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 400;
     letter-spacing: .16em;
     color: #fff;
     text-shadow: 0 2px 10px rgba(60,40,20,.35);
   }
   .logo-block .logo-sub{
-    font-size: 10.5px;
+    font-size: 9px;
     letter-spacing: .42em;
     text-transform: uppercase;
     color: rgba(255,255,255,.95);
     font-weight: 500;
-    margin-top: -2px;
+    margin-top: 0;
     text-shadow: 0 1px 6px rgba(60,40,20,.3);
   }
   .logo-block .rule{
     width: 36px; height: 1px; background: rgba(255,255,255,.75);
-    margin: 4px 0 2px;
   }
   .logo-block .credentials{
     font-size: 10px;
@@ -145,6 +167,7 @@
     color: rgba(255,255,255,.9);
     font-weight: 500;
     text-shadow: 0 1px 6px rgba(60,40,20,.3);
+    text-align: center;
   }
 
   /* ===== LINKS section ===== */
@@ -486,9 +509,11 @@
     .hero-top{ padding: 0 18px; }
     .hero-top .pill{ font-size: 10.5px; padding: 5px 10px; }
     .logo-block{ bottom: 28px; gap: 8px; }
-    .logo-block .logo-mark{ width: 50px; height: 50px; }
-    .logo-block .logo-name{ font-size: 26px; letter-spacing: .16em; }
-    .logo-block .logo-sub{ font-size: 10.5px; letter-spacing: .42em; }
+    .logo-block .logo-top{ gap: 8px; }
+    .logo-block .logo-mark{ width: 24px; height: 42px; }
+    .logo-block .logo-text{ align-items: flex-start; }
+    .logo-block .logo-name{ font-size: 24px; letter-spacing: .16em; }
+    .logo-block .logo-sub{ font-size: 9px; letter-spacing: .42em; }
     .logo-block .credentials{ font-size: 10px; letter-spacing: .32em; }
     .section{ padding: 36px 16px; }
     .card{ grid-template-columns: 88px 1fr auto; min-height: 92px; }
