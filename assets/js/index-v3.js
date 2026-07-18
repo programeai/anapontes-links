@@ -66,8 +66,41 @@
     if(e.data.type === '__deactivate_edit_mode') document.getElementById('tweaks').classList.remove('on');
   });
 
+  /* ===== Scroll reveal (staged + staggered) ===== */
+  function initReveal(){
+    const items = document.querySelectorAll('.reveal');
+    if(!items.length) return;
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce || !('IntersectionObserver' in window)){
+      items.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+
+    // stagger por grupo: elementos irmãos entram em cascata
+    const groups = new Map();
+    items.forEach(el => {
+      const parent = el.parentElement;
+      const idx = groups.get(parent) || 0;
+      el.style.setProperty('--i', idx);
+      groups.set(parent, idx + 1);
+    });
+
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+
+    items.forEach(el => io.observe(el));
+  }
+
   window.addEventListener('resize', syncAboutFigureHeight);
   window.addEventListener('load', syncAboutFigureHeight);
+  initReveal();
 
   wireTweaks();
   applyTweaks();

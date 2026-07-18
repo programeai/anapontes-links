@@ -562,3 +562,102 @@
     border: 1px solid var(--line); border-radius: 8px;
     padding: 4px 8px; background: var(--surface-alt);
   }
+
+  /* ====================================================== */
+  /* ===============  M O T I O N  ======================== */
+  /* ====================================================== */
+
+  /* ---- Hero entrance (pose-to-pose, slow-out) ---- */
+  .hero .portrait{
+    animation: hero-rise 1100ms cubic-bezier(.16,.84,.44,1) both;
+  }
+  .hero .ground{
+    animation: hero-ground 1200ms cubic-bezier(.16,.84,.44,1) both;
+  }
+  .hero .logo-block{
+    animation: hero-logo 900ms cubic-bezier(.16,.84,.44,1) 480ms both;
+  }
+  /* marca-d'água respira em loop lento (secondary action) */
+  .hero .watermark{
+    animation: watermark-drift 14s ease-in-out 800ms infinite;
+  }
+
+  @keyframes hero-rise{
+    0%   { opacity: 0; transform: translateX(-50%) translateY(28px) scale(1.02); }
+    100% { opacity: 1; transform: translateX(-50%) translateY(0)    scale(1); }
+  }
+  @keyframes hero-ground{
+    0%   { opacity: 0; transform: translateX(-50%) scaleX(.8); }
+    100% { opacity: 1; transform: translateX(-50%) scaleX(1); }
+  }
+  @keyframes hero-logo{
+    0%   { opacity: 0; transform: translateY(16px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes watermark-drift{
+    0%,100% { transform: translateX(-50%) translateY(0)    scale(1); opacity:.10; }
+    50%     { transform: translateX(-50%) translateY(-14px) scale(1.03); opacity:.14; }
+  }
+
+  /* ---- Scroll reveal (staged, staggered) ---- */
+  .reveal{
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity .6s cubic-bezier(0,0,.2,1),
+      transform .7s cubic-bezier(.16,.84,.44,1);
+    transition-delay: calc(var(--i, 0) * 80ms);
+    will-change: transform, opacity;
+  }
+  .reveal.is-visible{
+    opacity: 1;
+    transform: none;
+  }
+  /* about-figure entra pela lateral para dar direção */
+  .about-figure.reveal{ transform: translateX(-26px); }
+  .about-figure.reveal.is-visible{ transform: none; }
+
+  /* ---- Card hover: mais vida (secondary actions) ---- */
+  .card{ transform: translateY(0); }
+  .card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 18px 34px -18px rgba(129,90,46,.42), 0 3px 8px -3px rgba(16,24,40,.08);
+  }
+  .card:active{ transform: translateY(-1px) scale(.995); }
+  .card .thumb img{
+    transition: transform .5s cubic-bezier(.16,.84,.44,1);
+  }
+  .card:hover .thumb img{ transform: scale(1.07); }
+  .card .chev{
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+  }
+  .card:hover .chev{ transform: translateX(6px); }
+
+  /* pulso sutil de convite no chevron do primeiro card */
+  .links-list .card:first-child .chev svg{
+    animation: chev-nudge 2.4s ease-in-out 1.6s infinite;
+  }
+  @keyframes chev-nudge{
+    0%,88%,100% { transform: translateX(0); }
+    94%         { transform: translateX(3px); }
+  }
+
+  /* ---- Social / footer polish ---- */
+  .foot .mark img{ transition: transform .4s cubic-bezier(.34,1.56,.64,1); }
+  .foot .mark:hover img{ transform: rotate(-6deg) scale(1.08); }
+
+  /* ---- Respeita quem prefere menos movimento ---- */
+  @media (prefers-reduced-motion: reduce){
+    .hero .portrait,
+    .hero .ground,
+    .hero .logo-block,
+    .hero .watermark,
+    .links-list .card:first-child .chev svg{
+      animation: none !important;
+    }
+    .reveal{
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
