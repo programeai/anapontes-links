@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KG3SMG49');</script>
+<!-- End Google Tag Manager -->
 <title>Dra. Ana Pontes — Links</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +20,11 @@
 <link rel="stylesheet" href="assets/css/index-v3.css" />
 </head>
 <body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KG3SMG49"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <main data-screen-label="01 Editorial">
 
@@ -49,7 +62,7 @@
 
       <div class="links-list">
 
-        <a class="card reveal" href="https://wa.me/5583991353786?text=Olá!%20Gostaria%20de%20verificar%20a%20disponibilidade%20de%20horários%20para%20uma%20consulta%20com%20a%20Dra.%20Ana%20Pontes." target="_blank" rel="noopener noreferrer">
+        <a class="card reveal" data-link-id="agendamento" data-link-label="Agendamento" data-link-type="whatsapp" href="https://wa.me/5583991353786?text=Olá!%20Gostaria%20de%20verificar%20a%20disponibilidade%20de%20horários%20para%20uma%20consulta%20com%20a%20Dra.%20Ana%20Pontes." target="_blank" rel="noopener noreferrer">
           <div class="thumb"><img src="assets/v2/schedule.png" alt=""></div>
           <div class="body">
             <span class="eyebrow">Alcance o melhor de você</span>
@@ -61,7 +74,7 @@
           </span>
         </a>
 
-        <a class="card reveal" href="https://wa.me/5583991353786?text=Olá!%20Tenho%20interesse%20na%20Mentoria%20VIP.%20Ainda%20restam%20vagas%20para%20este%20mês?" target="_blank" rel="noopener noreferrer">
+        <a class="card reveal" data-link-id="mentoria_vip" data-link-label="Mentoria VIP" data-link-type="whatsapp" href="https://wa.me/5583991353786?text=Olá!%20Tenho%20interesse%20na%20Mentoria%20VIP.%20Ainda%20restam%20vagas%20para%20este%20mês?" target="_blank" rel="noopener noreferrer">
           <div class="thumb"><img src="assets/v2/mentoring.png" alt=""></div>
           <div class="body">
             <span class="eyebrow">Exclusivo · Vagas limitadas</span>
@@ -97,7 +110,7 @@
           </span>
         </a> -->
 
-        <a class="card reveal" href="https://www.draanapontes.com.br/" target="_blank" rel="noopener noreferrer">
+        <a class="card reveal" data-link-id="site_oficial" data-link-label="Site Oficial" data-link-type="site" href="https://www.draanapontes.com.br/" target="_blank" rel="noopener noreferrer">
           <div class="thumb"><img src="assets/v2/site.png" alt=""></div>
           <div class="body">
             <span class="eyebrow">Protocolos completos</span>
@@ -153,5 +166,49 @@
 </main>
 
 <script src="assets/js/index-v3.js"></script>
+
+<!-- Rastreamento de cliques nos links -> dataLayer (GTM) -->
+<script>
+(function () {
+  window.dataLayer = window.dataLayer || [];
+
+  function slug(s) {
+    return (s || '')
+      .toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]+/g, '_')
+      .replace(/^_+|_+$/g, '');
+  }
+
+  function typeFromUrl(url) {
+    if (/wa\.me|api\.whatsapp|chat\.whatsapp/i.test(url)) return 'whatsapp';
+    if (/maps\.(app\.)?goo|google\.com\/maps/i.test(url)) return 'mapa';
+    return 'site';
+  }
+
+  document.addEventListener('click', function (e) {
+    var card = e.target.closest('a.card');
+    if (!card) return;
+
+    var url = card.getAttribute('href') || '';
+    var titleEl = card.querySelector('.title');
+    var label = card.dataset.linkLabel
+      || (titleEl ? titleEl.textContent.trim().replace(/\s+/g, ' ') : 'sem_titulo');
+    var id = card.dataset.linkId || slug(label);
+
+    var cards = Array.prototype.slice.call(document.querySelectorAll('a.card'));
+    var position = cards.indexOf(card) + 1;
+
+    window.dataLayer.push({
+      event: 'link_click',
+      link_id: id,
+      link_label: label,
+      link_type: card.dataset.linkType || typeFromUrl(url),
+      link_url: url,
+      link_position: position
+    });
+  }, true);
+})();
+</script>
 </body>
 </html>
