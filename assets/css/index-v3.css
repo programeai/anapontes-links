@@ -210,6 +210,24 @@
     max-width: 720px;
     margin: 0 auto;
   }
+  .professional-route{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:18px 0 0;
+    color:var(--ink-mute);
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+  }
+  .professional-route::before,
+  .professional-route::after{
+    content:"";
+    height:1px;
+    flex:1;
+    background:var(--line-soft);
+  }
 
   .card{
     position: relative;
@@ -643,7 +661,7 @@
   }
   .card:hover .thumb img{ transform: scale(1.07); }
   .card .chev{
-    transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+    transition: transform .35s cubic-bezier(.16,.84,.44,1);
   }
   .card:hover .chev{ transform: translateX(6px); }
 
@@ -657,7 +675,7 @@
   }
 
   /* ---- Social / footer polish ---- */
-  .foot .mark img{ transition: transform .4s cubic-bezier(.34,1.56,.64,1); }
+  .foot .mark img{ transition: transform .4s cubic-bezier(.16,.84,.44,1); }
   .foot .mark:hover img{ transform: rotate(-6deg) scale(1.08); }
 
   /* ---- Respeita quem prefere menos movimento ---- */
